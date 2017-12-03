@@ -1,0 +1,3 @@
+#$ -a AL
+python /Shared/bdagroup7/download/NetflixRecommender/test.py > /Shared/bdagroup7/download/NetflixRecommender/test.out
+
