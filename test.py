@@ -1,6 +1,6 @@
 from surprise import SVD
 from surprise import Dataset, Reader
-from surprise import evaluate, print_perf
+from surprise import evaluate, print_perf, accuracy
 
 reader_params=dict(line_format='item rating user',
                    rating_scale=(1, 5),
@@ -20,11 +20,11 @@ algo = SVD()
 
 algo.train(training_set)
 
-predctions = algo.test(test_set)
+predictions = algo.test(test_set)
 
 # TODO: Ensemble
 
-rmse = surprise.accuracy.rmse(predictions, verbose=True)
+rmse = accuracy.rmse(predictions, verbose=True)
 
 print("RMSE is: ")
 print(rmse)
