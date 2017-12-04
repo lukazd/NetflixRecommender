@@ -24,4 +24,7 @@ predctions = algo.test(test_set)
 
 # TODO: Ensemble
 
-surprise.accuracy.rmse(predictions, verbose=True)
+rmse = surprise.accuracy.rmse(predictions, verbose=True)
+
+print("RMSE is: ")
+print(rmse)
