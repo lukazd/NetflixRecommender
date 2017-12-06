@@ -59,11 +59,12 @@ def readData():
                     
     DICT={'movie_id':movieids,'user_id':userids,'rating_value':movieratings}
     PDICT={'movie_id':pmovieids,'user_id':puserids,'rating_value':pratings}  
-    return DICT, PDICT       
+    return (DICT, PDICT)       
     
 d=readData()
-df2 = pd.DataFrame.from_dict(DICT, orient='columns', dtype=None)
-dfp = pd.DataFrame.from_dict(PDICT, orient='columns', dtype=None)
+df2 = pd.DataFrame.from_dict(d[0], orient='columns', dtype=None)
+dfp = pd.DataFrame.from_dict(d[1], orient='columns', dtype=None)
 print('Saving dataframe...')
 #df.to_pickle('flixpdframe.pkl')
 df2.to_csv('/Shared/bdagroup7/download/flixminusprobe.csv')
+dfp.to_csv('/Shared/bdagroup7/download/flixprobe.csv')
