@@ -27,11 +27,16 @@ def readData():
     probe=readProbe()
     numratings=100480507-1408395
     nummovies=17770
+    pratings=1408395
     movieratings=np.zeros(numratings,dtype=np.int8)
     movieids=np.zeros(numratings,dtype=np.int16)
     userids=np.zeros(numratings,dtype=np.int32)
+    pmovieratings=np.zeros(pratings,dtype=np.int8)
+    pmovieids=np.zeros(pratings,dtype=np.int16)
+    puserids=np.zeros(pratings,dtype=np.int32)
     DIR_PATH = '/Shared/bdagroup7/download/training_set/'
     counter=0
+    pcounter=0
     for i in range(nummovies):
         if i % 100 == 0: print('Extracting movie %d' % i)
         f=open(DIR_PATH + 'mv_%07d.txt' % (i+1), 'rt')
@@ -43,15 +48,22 @@ def readData():
                 if (user_id,movie_id) not in probe:
                     userids[counter]=user_id
                     movieids[counter]=movie_id
-                    rating=np.int(line_list[1])
+                    rating=np.int8(line_list[1])
                     movieratings[counter]=rating
                     counter= counter+1
+                else:
+                    puserids[pcounter] = user_id
+                    pmovieids[pcounter] = movie_id
+                    pratings[pcounter] = np.int8(line_list[1])
+                    pcounter += 1
+                    
     DICT={'movie_id':movieids,'user_id':userids,'rating_value':movieratings}
-    return(DICT)       
+    PDICT={'movie_id':pmovieids,'user_id':puserids,'rating_value':pratings}  
+    return DICT, PDICT       
     
 d=readData()
-df2 = pd.DataFrame.from_dict(d, orient='columns', dtype=None)
+df2 = pd.DataFrame.from_dict(DICT, orient='columns', dtype=None)
+dfp = pd.DataFrame.from_dict(PDICT, orient='columns', dtype=None)
 print('Saving dataframe...')
 #df.to_pickle('flixpdframe.pkl')
-df2.to_pickle('flixminusprobe.pkl')
-df2.to_csv('flixminusprobe.csv')
+df2.to_csv('/Shared/bdagroup7/download/flixminusprobe.csv')
