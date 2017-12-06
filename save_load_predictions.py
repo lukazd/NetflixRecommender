@@ -4,5 +4,5 @@ with open('predictions.data', "wb") as f:
 
 #to load predictions
 
-with(open('predictions.dat', "rb") as f:
+with open('predictions.dat', "rb") as f:
 	g = pickle.load(f)
