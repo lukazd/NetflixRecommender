@@ -6,7 +6,8 @@ dictionary as probe
 '''
                     
 def readProbe():
-    PROBE_PATH= '/Shared/bdagroup7/download/probe.txt'
+    #PROBE_PATH= '/Shared/bdagroup7/download/probe.txt'
+    PROBE_PATH = 'C:/Users/CReic/.spyder-py3/input_files/download/probe.txt'
     probeFile=open(PROBE_PATH)
     probe={}
     for line in probeFile:
@@ -34,7 +35,8 @@ def readData():
     pmovieratings=np.zeros(pratings,dtype=np.int8)
     pmovieids=np.zeros(pratings,dtype=np.int16)
     puserids=np.zeros(pratings,dtype=np.int32)
-    DIR_PATH = '/Shared/bdagroup7/download/training_set/'
+    #DIR_PATH = '/Shared/bdagroup7/download/training_set/'
+    DIR_PATH = 'C:/Users/CReic/.spyder-py3/input_files/download/training_set/'
     counter=0
     pcounter=0
     for i in range(nummovies):
@@ -54,11 +56,12 @@ def readData():
                 else:
                     puserids[pcounter] = user_id
                     pmovieids[pcounter] = movie_id
-                    pratings[pcounter] = np.int8(line_list[1])
+                    prating = np.int8(line_list[1])
+                    pmovieratings[pcounter] = prating
                     pcounter += 1
                     
     DICT={'movie_id':movieids,'user_id':userids,'rating_value':movieratings}
-    PDICT={'movie_id':pmovieids,'user_id':puserids,'rating_value':pratings}  
+    PDICT={'movie_id':pmovieids,'user_id':puserids,'rating_value':pmovieratings}  
     return (DICT, PDICT)       
     
 d=readData()
