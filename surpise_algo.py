@@ -13,8 +13,8 @@ import pickle
 
 #df = pd.read_pickle('flixpdframe.pkl')
 print('Loading data...')
-df = pd.read_pickle('flixpd3ksample.pkl')
-df2 = df.take(np.random.permutation(len(df))[:20000])
+df2 = pd.read_pickle('C:/Users/CReic/.spyder-py3/flixpd3ksample.pkl')
+df2 = df2.take(np.random.permutation(len(df2))[:20000])
 print('Rearranging columns...')
 cols = df2.columns.tolist()
 cols = cols[-1:] + cols[:-1]
@@ -33,12 +33,15 @@ bsl_options = {'method': 'sgd',
              'learning_rate': .0005
              }
 
-sim_options = {'name': 'cosine',
+#bsl_options = {'method': 'sgd',
+#             'learning_rate': .0005
+#             }
+
+sim_options = {'name': 'cosine', 'min_support': 5,
                'user_based': True, 
                }
 
-algo1 = surprise.KNNBasic(bsl_options=bsl_options,
-                 sim_options=sim_options)
+algo1 = surprise.KNNBasic(sim_options=sim_options)
 
 algo2 = surprise.KNNWithMeans(k=15, min_k=5,
                      sim_options=sim_options)
