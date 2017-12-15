@@ -1,5 +1,5 @@
 import pickle
-from surprise import SVD, SVDpp, KNNBasic, CoClustering
+from surprise import SVD, SVDpp, KNNBasic, CoClustering, BaselineOnly
 from surprise import Dataset, Reader
 from surprise import evaluate, print_perf, accuracy
 
@@ -38,13 +38,14 @@ bsl_options = {'method' : 'sgd', 'learning_rate' : .0005}
 #algo = KNNBasic(k=10, min_k=8, sim_options=sim_options)
 #algo = KNNWithMeans(k=15, min_k=5, sim_options=sim_options)
 #algo = CoClustering()
-algo = SVDpp()
+#algo = SVDpp()
+algo = BaselineOnly()
 
 algo.train(training_set)
 
 predictions = algo.test(test_set)
 
-with open('/Shared/bdagroup7/download/predictions_svd_pp.dat', "wb") as f:
+with open('/Shared/bdagroup7/download/predictions_baseline.dat', "wb") as f:
     pickle.dump(predictions, f)
 
 # TODO: Ensemble

@@ -34,17 +34,17 @@ sim_options = {'name' : 'cosine', 'min_support': 50, 'user_based' : True}
 bsl_options = {'method' : 'sgd', 'learning_rate' : .0005}
 
 # Algorithms (only select one)
-#algo = SVD()
+algo = SVD()
 #algo = KNNBasic(k=10, min_k=8, sim_options=sim_options)
 #algo = KNNWithMeans(k=15, min_k=5, sim_options=sim_options)
 #algo = CoClustering()
-algo = SVDpp()
+#algo = SVDpp()
 
 algo.train(training_set)
 
 predictions = algo.test(test_set)
 
-with open('/Shared/bdagroup7/download/predictions_svd_pp.dat', "wb") as f:
+with open('/Shared/bdagroup7/download/predictions_svd.dat', "wb") as f:
     pickle.dump(predictions, f)
 
 # TODO: Ensemble
